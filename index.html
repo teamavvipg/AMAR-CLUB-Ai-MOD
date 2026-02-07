@@ -43,7 +43,7 @@
             text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* --- ফটোর মতো সিগন্যাল প্যানেল ডিজাইন --- */
+        /* --- সিগন্যাল প্যানেল ডিজাইন --- */
         #signalPanel {
             position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
             width: 170px; height: 170px;
@@ -54,7 +54,6 @@
             overflow: hidden; z-index: 10000; cursor: move; touch-action: none;
         }
 
-        /* জ্বলন্ত আগুনের রিং */
         .radiant-ring {
             position: absolute; width: 130px; height: 130px;
             border-radius: 50%;
@@ -63,7 +62,6 @@
             z-index: 1;
         }
 
-        /* রিং-এর বাইরের আগুনের শিখা (Cracks Effect) */
         .radiant-ring::before {
             content: ""; position: absolute; top: -12px; left: -12px; right: -12px; bottom: -12px;
             border-radius: 50%;
@@ -83,21 +81,33 @@
         .number-display {
             font-family: 'Arial Black', sans-serif; font-size: 75px;
             font-weight: 900; z-index: 5; line-height: 70px; margin-bottom: 5px;
-            /* ফটোর মতো গোল্ডেন টেক্সট */
             background: linear-gradient(to bottom, #fff 20%, #ffcc00 50%, #ff4400 90%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(2px 2px 2px #000);
         }
 
         .analysis-bar {
-            background: #ffaa00; /* ফটোর মতো হলুদ/অরেঞ্জ ব্যাকগ্রাউন্ড */
+            background: #ffaa00; 
             padding: 2px 12px; border-radius: 20px; 
             color: #000; font-family: sans-serif; font-size: 9px; font-weight: 900;
             z-index: 5; box-shadow: 0 0 10px #ff4400; margin-top: 5px;
         }
 
-        #gamePage { display: none; height: 100vh; position: relative; }
-        iframe { width: 100%; height: 100%; border: none; }
+        /* --- FIXED GAME PAGE AREA --- */
+        #gamePage { 
+            display: none; 
+            height: 100vh; /* স্ক্রিনের পুরো উচ্চতা নিবে */
+            width: 100vw; 
+            position: fixed; /* ফিক্সড যাতে নিচে না নামে */
+            top: 0; left: 0; 
+            overflow: hidden; 
+        }
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -138,7 +148,6 @@
     let lastPeriod = "";
 
     function checkPass() {
-        // এখানে আপনার পাসওয়ার্ড (১০২০) চেক হবে
         if (document.getElementById('accessKey').value === "1020") {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('gamePage').style.display = 'block';
@@ -147,7 +156,6 @@
         } else { alert("ACCESS DENIED!"); }
     }
 
-    // Drag Logic
     const panel = document.getElementById("signalPanel");
     let active = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
     panel.addEventListener("touchstart", dragStart); panel.addEventListener("mousedown", dragStart);
